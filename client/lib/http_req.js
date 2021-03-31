@@ -2,9 +2,9 @@ const request=require('superagent');
 const {createLogger}=require('winston');
 
 class HttpReq{
-    send(route,header,body,options){
+    send(action,route,header,body,options){
         return new Promise((resolve,reject)=>{
-            request(route)
+            request[action](route)
                 .send(body)
                 .retry(3,(err,res)=>{
                     if(err) console.log(err)
