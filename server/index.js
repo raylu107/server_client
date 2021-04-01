@@ -18,3 +18,5 @@ app.use(function(req, res, next) {
 app.listen(port,()=>{
     console.log(`server listen on ${port}`);
 })
+
+module.exports = {app};

@@ -8,7 +8,8 @@ const {
     }=require('../model/mock_db')
 const {
     validateExisting,
-    validateNewUser
+    validateNewUser,
+    authCheck
 } =require('../lib/validate')
 
 router.get('/health',(req,res)=>{
@@ -16,6 +17,7 @@ router.get('/health',(req,res)=>{
 })
 
 router.get('/users',
+    authCheck,
     async (req,res,next)=>{
         const users=await getUsers();
         res.status(200).send(users);

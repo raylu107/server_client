@@ -40,7 +40,19 @@ const validateNewUser=async(req,res,next)=>{
         return await errorHandle(res,500,e)
     }
 }
+const authCheck=async(req,res,next)=>{
+    if(!req.headers.authorization){
+        return await errorHandle(res,401,"no token");
+    }
+    const token=req.headers.authorization;
+    if(token.split(' ')[1]!=="12342234"){
+        return await errorHandle(res,401,"access deny");
+    }
+    return next();
+
+}
 module.exports={
     validateExisting,
-    validateNewUser
+    validateNewUser,
+    authCheck
 }
