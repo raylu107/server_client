@@ -25,3 +25,5 @@ rl.on("line", async function(line) {
     }
   }
 });
+
+//error response handle
