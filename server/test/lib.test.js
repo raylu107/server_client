@@ -2,17 +2,20 @@ const {validateExisting}=require('../lib/validate');
 // const {users}
 const request = require("supertest");
 const expect=require('chai').expect;
-const {app}=require('../index');
+const app=require('../server/index');
 
 describe('test validateExisting',()=>{
-    afterAll(done => {
+    afterAll(() => {
         // Closing the DB connection allows Jest to exit successfully.
         // mongoose.connection.close()
-        done();
+        app.close();
+        // await new Promise((resolve,reject)=>{resolve(app.close())});
+        // done();
       })
-    it('should pass',()=>{
-        // const result=await request(app)
-        //         .get("/users")
-        expect(200).to.equal(200);
-    }, 3000)
+    it('should pass',async()=>{
+        const result= await request(app)
+                .get("/users")
+                .set('Authorization', 'bearer ' + '12342234')
+        expect(result.status).to.equal(200);
+    })
 })
